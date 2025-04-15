@@ -15,7 +15,14 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/dashboard', function () {
+    $user = Auth::user();
+    if ($user->role === 'member') {
+        $transactions = $user->transactions()->with('book')->get();
+        return view('dashboard_member', compact('transactions'));
+    }
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
@@ -50,9 +57,15 @@ Route::post('transactions/{transaction}/return', [TransactionController::class, 
 
 // Dashboard-specific routes with prefix and name prefix
 Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(function () {
-    Route::resource('books', BookController::class);
-    Route::resource('members', MemberController::class);
-    Route::resource('transactions', TransactionController::class)->except(['show']);
+    Route::resource('books', BookController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('members', MemberController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('transactions', TransactionController::class)->except(['show', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::post('transactions/{transaction}/return', [TransactionController::class, 'return'])
         ->name('transactions.return');
+});
+
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'checkrole:admin'])->group(function () {
+    Route::resource('books', BookController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('members', MemberController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('transactions', TransactionController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
 });
