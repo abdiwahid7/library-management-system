@@ -31,12 +31,11 @@
                         <div class="text-xl font-bold text-blue-600">LibraryMS</div>
                     </div>
                     <div class="flex items-center space-x-4">
-                    <a href="{{ url('/') }}" class="hover:text-gray-900">Home</a></li>
-                    <a href="{{ route('books.front') }}" class="hover:text-gray-900">Books</a></li>
-                    <a href="{{ route('members.front') }}" class="hover:text-gray-900">Members</a></li>
-                    <a href="{{ route('transactions.front') }}" class="hover:text-gray-900">Transactions</a></li>
-                    <a href="/login">Login</a></li>
-                    <a href="/register">Register</a></li>
+                        <a href="{{ route('books.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Books</a>
+                        <a href="{{ route('members.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Members</a>
+                        <a href="{{ route('transactions.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Transactions</a>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
                     </div>
                 </div>
             </div>
@@ -50,10 +49,10 @@
                     A complete solution for managing your library's books, members, and transactions.
                 </p>
                 <div class="flex justify-center space-x-4">
-                    <a href="{{ route('books.index') }}" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition duration-300">
+                    <a href="{{ route('books.front') }}" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition duration-300">
                         Browse Books
                     </a>
-                    <a href="{{ route('members.index') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-300">
+                    <a href="{{ route('members.front') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-300">
                         View Members
                     </a>
                 </div>

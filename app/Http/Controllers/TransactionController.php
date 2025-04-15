@@ -28,6 +28,12 @@ class TransactionController extends Controller
         return view('transactions.front', compact('transactions'));
     }
 
+    public function member()
+    {
+        $transactions = Transaction::with(['book', 'member'])->latest()->paginate(10);
+        return view('transactions.member', compact('transactions'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -13,7 +13,7 @@
                 <div class="p-6 text-gray-900">
                     <p>Welcome, {{ auth()->user()->name }}! This is your member dashboard.</p>
                     <p>You can view books and check the status of your transactions here.</p>
-                    <a href="{{ route('books.index') }}" class="text-blue-500 underline">View Books</a>
+                    <a href="{{ route('books.member') }}" class="text-blue-500 underline">View Books</a>
                     <br><br>
                     <h3 class="text-lg font-semibold">Your Transactions</h3>
                     <ul>

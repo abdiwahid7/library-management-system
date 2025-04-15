@@ -26,6 +26,11 @@ class BookController extends Controller
         return view('books.front', compact('books'));
     }
 
+    public function member()
+    {
+        $books = Book::with('author')->paginate(10);
+        return view('books.member', compact('books'));
+    }
     /**
      * Show the form for creating a new resource.
      */

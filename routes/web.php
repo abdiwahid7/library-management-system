@@ -36,10 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
- // Add frontend named routes for 'front' views
+// Add frontend named routes for 'front' views
 Route::get('books/front', [BookController::class, 'front'])->name('books.front');
+Route::get('books/member', [BookController::class, 'member'])->name('books.member');
 Route::get('members/front', [MemberController::class, 'front'])->name('members.front');
 Route::get('transactions/front', [TransactionController::class, 'front'])->name('transactions.front');
+Route::get('transactions/member', [TransactionController::class, 'member'])->name('transactions.member');
 
 // Front-end Book Routes
 Route::resource('books', BookController::class);
