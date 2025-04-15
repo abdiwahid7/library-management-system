@@ -17,6 +17,15 @@ class MemberController extends Controller
     }
 
     /**
+     * Display the frontend listing of members.
+     */
+    public function front()
+    {
+        $members = Member::paginate(10);
+        return view('members.front', compact('members'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

@@ -17,6 +17,11 @@ class Transaction extends Model
         'return_date'
     ];
 
+    protected $casts = [
+        'transaction_date' => 'date',
+        'return_date' => 'date',
+    ];
+
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class);

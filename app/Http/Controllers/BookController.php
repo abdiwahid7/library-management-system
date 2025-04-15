@@ -18,6 +18,15 @@ class BookController extends Controller
     }
 
     /**
+     * Display the frontend listing of books.
+     */
+    public function front()
+    {
+        $books = Book::with('author')->paginate(10);
+        return view('books.front', compact('books'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

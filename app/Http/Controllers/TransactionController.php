@@ -20,6 +20,15 @@ class TransactionController extends Controller
     }
 
     /**
+     * Display the frontend listing of transactions.
+     */
+    public function front()
+    {
+        $transactions = Transaction::with(['book', 'member'])->latest()->paginate(10);
+        return view('transactions.front', compact('transactions'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

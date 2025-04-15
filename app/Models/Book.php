@@ -18,6 +18,10 @@ class Book extends Model
         'published_date'
     ];
 
+    protected $casts = [
+        'published_date' => 'date',
+    ];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
