@@ -12,7 +12,7 @@
 
 <style>
     .hero {
-        background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+        background: linear-gradient(135deg,rgb(107, 122, 255) 0%,rgb(243, 246, 246) 100%);
     }
     .feature-card:hover {
         transform: translateY(-5px);
@@ -35,11 +35,13 @@
                     <a href="{{ route('books.front') }}" class="hover:text-gray-900">Books</a></li>
                     <a href="{{ route('members.front') }}" class="hover:text-gray-900">Members</a></li>
                     <a href="{{ route('transactions.front') }}" class="hover:text-gray-900">Transactions</a></li>
+                    <a href="/login" class="hover::text-gray-900">Login</a>
+                    <a href="/register" class="hover:text-gray-900">Register</a>
                     </div>
                 </div>
             </div>
     </nav>
-   
+
 
     <main class="container mx-auto py-8">
         @yield('content')

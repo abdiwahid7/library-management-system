@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProfileController;
 
@@ -30,6 +31,11 @@ Route::get('/dashboard/home', function () {
     return view('dashboard.home');
 })->middleware(['auth'])->name('dashboard.home');
 
+
+Route::middleware(['auth', 'checkRole:admin'])->group(function () {
+    Route::resource('users', UserController::class);
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,6 +48,22 @@ Route::get('books/member', [BookController::class, 'member'])->name('books.membe
 Route::get('members/front', [MemberController::class, 'front'])->name('members.front');
 Route::get('transactions/front', [TransactionController::class, 'front'])->name('transactions.front');
 Route::get('transactions/member', [TransactionController::class, 'member'])->name('transactions.member');
+
+Route::get('/dashboard', function () {
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        $users = \App\Models\User::all(); // Fetch all users for the admin dashboard
+        return view('dashboard', compact('users'));
+    }
+
+    if ($user->role === 'member') {
+        $transactions = $user->transactions()->with('book')->get();
+        return view('dashboard_member', compact('transactions'));
+    }
+
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Front-end Book Routes
 Route::resource('books', BookController::class);
@@ -66,7 +88,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
         ->name('transactions.return');
 });
 
-Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'checkrole:admin'])->group(function () {
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('books', BookController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
     Route::resource('members', MemberController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
     Route::resource('transactions', TransactionController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);

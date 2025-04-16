@@ -1,0 +1,138 @@
+<?php
+Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware(['auth', 'checkrole:admin']);
+<li class="py-2 px-4 hover:bg-blue-700 rounded">
+<a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'font-bold' : '' }}">Dashboard Home</a>
+</li>
+<li class="py-2 px-4 hover:bg-blue-700 rounded">
+<a href="{{ route('users.index') }}" class="{{ request()->routeIs('users.*') ? 'font-bold' : '' }}">Users</a>
+</li>
+<!-- Page Content -->
+<div class="content">
+    <h2>Registered Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ ucfirst($user->role) }}</td>
+                    <td class="action-buttons">
+                        <a href="{{ route('users.show', $user->id) }}" class="view">View</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="edit">Edit</a>
+                        <form method="POST" action="{{ route('users.destroy', $user->id) }}" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-900 text-white p-5">
+            <h2 class="text-2xl font-bold">Admin Panel</h2>
+            <ul class="mt-6">
+            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('dashboard') }}>Dashboard Home</a>
+</li>
+            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('books.index') }}">Books</a></li>
+            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('members.index') }}">Members</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{route('authors.index')}}">Authors</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('transactions.index') }}">Transaction</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('users.index') }}">Users</a>
+</li>
+
+
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Navbar -->
+            <div class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold">{{ config('app.name') }}</h1>
+                <div class="flex items-center space-x-4">
+                    <span>Admin</span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+                    </form>
+                </div>
+            </div>
+            <!-- content here -->
+            <div class="p-6">
+                @yield('content')
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="w-full bg-white shadow p-4">
+                <h2 class="text-2xl font-bold mb-4">User Management</h2>
+                <table class="table-auto w-full border-collapse border border-gray-300">
+                    <thead>
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2">ID</th>
+                            <th class="border border-gray-300 px-4 py-2">Name</th>
+                            <th class="border border-gray-300 px-4 py-2">Email</th>
+                            <th class="border border-gray-300 px-4 py-2">Role</th>
+                            <th class="border border-gray-300 px-4 py-2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">{{ $user->id }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $user->name }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
+                                <td class="border border-gray-300 px-4 py-2">{{ ucfirst($user->role) }}</td>
+                                <td class="border border-gray-300 px-4 py-2">
+                                    <a href="{{ route('users.show', $user->id) }}" class="text-blue-500 hover:underline">View</a>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="text-yellow-500 hover:underline ml-2">Edit</a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline-block ml-2">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>

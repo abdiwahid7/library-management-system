@@ -31,11 +31,11 @@
                         <div class="text-xl font-bold text-blue-600">LibraryMS</div>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="{{ route('books.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Books</a>
-                        <a href="{{ route('members.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Members</a>
-                        <a href="{{ route('transactions.index') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Transactions</a>
-                        <a href="/login">Login</a>
-                        <a href="/register">Register</a>
+                        <a href="{{ route('books.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Books</a>
+                        <a href="{{ route('members.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Members</a>
+                        <a href="{{ route('transactions.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Transactions</a>
+                        <a href="/login" class="text-gray-600 hover:text-blue-600 px-3 py-2">Login</a>
+                        <a href="/register" class="text-gray-600 hover:text-blue-600 px-3 py-2">Register</a>
                     </div>
                 </div>
             </div>

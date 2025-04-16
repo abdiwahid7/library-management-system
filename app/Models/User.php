@@ -47,6 +47,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
     public function transactions()
     {
         return $this->hasMany(\App\Models\Transaction::class, 'member_id');
