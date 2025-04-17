@@ -6,8 +6,8 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold">Authors</h2>
-                    <a href="{{ route('authors.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <h2 class="text-2xl font-semibold text-gray-800">Authors</h2>
+                    <a href="{{ route('authors.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
                         Add New Author
                     </a>
                 </div>
@@ -18,7 +18,7 @@
                     </div>
                 @endif
 
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto shadow-md rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
@@ -30,14 +30,14 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($authors as $author)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $author->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ Str::limit($author->biography, 50) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $author->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ Str::limit($author->biography, 50) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('authors.edit', $author->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                        <a href="{{ route('authors.edit', $author->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3 transition duration-300">Edit</a>
                                         <form action="{{ route('authors.destroy', $author->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">Delete</button>
+                                            <button type="submit" class="text-red-600 hover:text-red-900 transition duration-300" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -45,8 +45,13 @@
                         </tbody>
                     </table>
                 </div>
+
+                @if($authors->isEmpty())
+                    <p class="text-gray-500 mt-4">No authors available. Please add new authors.</p>
+                @endif
             </div>
         </div>
     </div>
 </div>
+
 @endsection

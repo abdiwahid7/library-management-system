@@ -59,9 +59,9 @@ Route::get('services/front', [ServiceController::class, 'front'])->name('service
 Route::get('services/member', [ServiceController::class, 'member'])->name('services.member');
 Route::resource('services', ServiceController::class);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
+Route::get('contacts', [ContactController::class, 'index'])->middleware('auth')->name('contacts.index');
 
 Route::get('/dashboard', function () {
     $user = Auth::user();

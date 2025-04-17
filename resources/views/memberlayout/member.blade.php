@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-blue-500 text-white p-5">
+        <div class="w-64 bg-green-500 text-white p-5">
             <h2 class="text-2xl font-bold">Member Panel</h2>
             <ul class="mt-6">
-            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('dashboard') }}>Dashboard </a>
-</li>
-            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('books.member') }}">Books</a></li>
-                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('services.member') }}">Services</a></li>
-
-</li>
-
-
+                <li class="py-2 px-4 hover:bg-green-700 rounded">
+                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-green-700 rounded">
+                    <a href="{{ route('books.member') }}">Books</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-green-700 rounded">
+                    <a href="{{ route('services.member') }}">Services</a>
+                </li>
+                <li class="py-2 px-4 hover:bg-green-700 rounded">
+                    <a href="{{ route('contacts.create') }}">Contact Us</a>
+                </li>
             </ul>
         </div>
 
@@ -39,8 +42,13 @@
                     </form>
                 </div>
             </div>
-            <!-- content here -->
+
+            <!-- Content -->
             <div class="p-6">
                 @yield('content')
             </div>
+        </div>
+    </div>
+</body>
 
+</html>
