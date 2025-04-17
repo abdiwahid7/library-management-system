@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProfileController;
 
@@ -36,6 +37,12 @@ Route::get('/dashboard/home', function () {
 
 Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
     Route::resource('users', UserController::class);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('services/{service}/book', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('services/{service}/book', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
 });
 
 

@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\Transaction::class, 'member_id');
     }
+
+    public function bookings()
+{
+    return $this->hasMany(Booking::class);
+}
 }

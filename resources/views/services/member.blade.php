@@ -2,23 +2,21 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="text-primary mb-4 text-center">Services for Members</h1>
+    <h1 class="text-4xl font-semibold text-primary mb-4 text-center">Services for Members</h1>
 
-    <div class="row">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @forelse($services as $service)
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-primary">{{ $service->name }}</h5>
-                        <p class="card-text text-muted">{{ $service->description ?? 'No description available.' }}</p>
-                        <p class="card-text"><strong>Price:</strong> ${{ number_format($service->price, 2) }}</p>
-                        <a href="#" class="btn btn-primary btn-sm mt-auto">Book Service</a>
-                    </div>
+            <div class="mb-4">
+                <div class="bg-white shadow-lg h-full rounded-lg p-6">
+                    <h5 class="text-xl font-semibold text-green-600">{{ $service->name }}</h5>
+                    <p class="text-sm text-gray-600">{{ $service->description ?? 'No description available.' }}</p>
+                    <p class="mt-2 text-lg"><strong>Price:</strong> ${{ number_format($service->price, 2) }}</p>
+                    <a href="{{ route('bookings.create', $service) }}" class="bg-green-600 text-white px-4 py-2 rounded-lg mt-4 inline-block hover:bg-green-700 transition duration-300">Book Service</a>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info text-center">
+                <div class="bg-blue-100 text-center py-3 px-6 rounded-lg">
                     No services available for members at the moment.
                 </div>
             </div>
@@ -26,7 +24,8 @@
     </div>
 
     <div class="mt-4">
-        {{ $services->links('pagination::bootstrap-5') }}
+        {{ $services->links('pagination::tailwind') }}
     </div>
 </div>
+
 @endsection
