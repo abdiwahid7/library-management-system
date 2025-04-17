@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Layout</title>
+    <title>LibraryMS </title>
       <!-- Tailwind CSS -->
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
@@ -24,23 +24,23 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen hero flex flex-col">
 
-    <nav class="bg-white shadow-sm">
+<nav class="bg-white shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex items-center">
                         <div class="text-xl font-bold text-blue-600">LibraryMS</div>
                     </div>
                     <div class="flex items-center space-x-4">
-                    <a href="{{ url('/') }}" class="hover:text-gray-900">Home</a></li>
-                    <a href="{{ route('books.front') }}" class="hover:text-gray-900">Books</a></li>
-                    <a href="{{ route('members.front') }}" class="hover:text-gray-900">Members</a></li>
-                    <a href="{{ route('transactions.front') }}" class="hover:text-gray-900">Transactions</a></li>
-                    <a href="/login" class="hover::text-gray-900">Login</a>
-                    <a href="/register" class="hover:text-gray-900">Register</a>
+                        <a href="/" class="text-gray-600 hover:text-blue-600 px-3 py-2">Home</a>
+                        <a href="{{ route('books.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Books</a>
+                        <a href="{{ route('services.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Services</a>
+                        <a href="/contact">Contact Us</a>
+                        <a href="/login" class="text-gray-600 hover:text-blue-600 px-3 py-2">Login</a>
+                        <a href="/register" class="text-gray-600 hover:text-blue-600 px-3 py-2">Register</a>
                     </div>
                 </div>
             </div>
-    </nav>
+        </nav>
 
 
     <main class="container mx-auto py-8">

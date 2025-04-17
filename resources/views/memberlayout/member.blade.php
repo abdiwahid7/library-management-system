@@ -18,7 +18,7 @@
             <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('dashboard') }}>Dashboard </a>
 </li>
             <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('books.member') }}">Books</a></li>
-                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('transactions.member') }}">Transaction</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('services.member') }}">Services</a></li>
 
 </li>
 

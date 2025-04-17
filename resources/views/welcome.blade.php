@@ -31,9 +31,10 @@
                         <div class="text-xl font-bold text-blue-600">LibraryMS</div>
                     </div>
                     <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-blue-600 px-3 py-2">Home</a>
                         <a href="{{ route('books.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Books</a>
-                        <a href="{{ route('members.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Members</a>
-                        <a href="{{ route('transactions.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Transactions</a>
+                        <a href="{{ route('services.front') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2">Services</a>
+                        <a href="/contact">Contact Us</a>
                         <a href="/login" class="text-gray-600 hover:text-blue-600 px-3 py-2">Login</a>
                         <a href="/register" class="text-gray-600 hover:text-blue-600 px-3 py-2">Register</a>
                     </div>
@@ -52,8 +53,8 @@
                     <a href="{{ route('books.front') }}" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition duration-300">
                         Browse Books
                     </a>
-                    <a href="{{ route('members.front') }}" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-300">
-                        View Members
+                    <a href="/frontservice" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 transition duration-300">
+                        View Services
                     </a>
                 </div>
             </div>

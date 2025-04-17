@@ -11,9 +11,9 @@ class UserController extends Controller
      * Display a listing of the users.
      */
     public function index()
-{
-    $users = User::all(); // Fetch all users from the database
-    return view('adminlayout.admin', compact('users')); // Pass users to the view
+    {
+        $users = User::all(); // Fetch all users from the database
+        return view('users.index', compact('users')); // Pass users to the view
 }
 
     /**

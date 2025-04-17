@@ -7,6 +7,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProfileController;
 
@@ -32,9 +34,11 @@ Route::get('/dashboard/home', function () {
 })->middleware(['auth'])->name('dashboard.home');
 
 
-Route::middleware(['auth', 'checkRole:admin'])->group(function () {
+Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
     Route::resource('users', UserController::class);
 });
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,12 +46,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // Add frontend named routes for 'front' views
 Route::get('books/front', [BookController::class, 'front'])->name('books.front');
 Route::get('books/member', [BookController::class, 'member'])->name('books.member');
 Route::get('members/front', [MemberController::class, 'front'])->name('members.front');
 Route::get('transactions/front', [TransactionController::class, 'front'])->name('transactions.front');
+
 Route::get('transactions/member', [TransactionController::class, 'member'])->name('transactions.member');
+
+Route::get('services/front', [ServiceController::class, 'front'])->name('services.front');
+Route::get('services/member', [ServiceController::class, 'member'])->name('services.member');
+Route::resource('services', ServiceController::class);
+
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 Route::get('/dashboard', function () {
     $user = Auth::user();

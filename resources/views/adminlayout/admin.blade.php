@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-100">
@@ -15,15 +14,13 @@
         <div class="w-64 bg-blue-500 text-white p-5">
             <h2 class="text-2xl font-bold">Admin Panel</h2>
             <ul class="mt-6">
-            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('dashboard') }}>Dashboard </a></li>
-            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('books.index') }}">Books</a></li>
-            <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('members.index') }}">Members</a></li>
-                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{route('authors.index')}}">Authors</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('books.index') }}">Books</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('members.index') }}">Members</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('authors.index') }}">Authors</a></li>
                 <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('transactions.index') }}">Transaction</a></li>
-                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('users.index') }}">Users</a>
-</li>
-
-
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('services.index') }}">Services</a></li>
+                <li class="py-2 px-4 hover:bg-blue-700 rounded"><a href="{{ route('users.index') }}">User Management</a></li>
             </ul>
         </div>
 
@@ -45,4 +42,7 @@
             <div class="p-6">
                 @yield('content')
             </div>
-
+        </div>
+    </div>
+</body>
+</html>

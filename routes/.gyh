@@ -136,3 +136,19 @@ Route::resource('users', UserController::class)->middleware(['auth', 'checkrole:
                     </tbody>
                 </table>
             </div>
+
+
+
+
+
+                        <?php
+            // Frontend routes
+            Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+            Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+            Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+
+            // Backend routes (admin)
+            Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
+                Route::resource('admin/contacts', ContactController::class)->except(['create', 'store']);
+                Route::resource('admin/services', ServiceController::class);
+            });
