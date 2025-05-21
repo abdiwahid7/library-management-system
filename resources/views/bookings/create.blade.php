@@ -1,21 +1,23 @@
 @extends('memberlayout.member')
 
 @section('content')
-<div class="container mt-5">
-    <h1 class="text-primary mb-4">Book Service: {{ $service->name }}</h1>
-
-    <form action="{{ route('bookings.store', $service) }}" method="POST" class="shadow p-4 bg-white rounded">
+<div class="max-w-md mx-auto bg-white p-8 rounded shadow">
+    <h2 class="text-2xl font-bold mb-6">Book a Service</h2>
+    <form action="{{ route('bookings.store', $service->id) }}" method="POST">
         @csrf
-        <div class="mb-3">
-            <label for="booking_date" class="form-label">Booking Date</label>
-            <input type="date" class="form-control @error('booking_date') is-invalid @enderror" id="booking_date" name="booking_date" required>
-            @error('booking_date')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+
+        <!-- Optionally display the user's email (readonly) -->
+        <div class="mb-4">
+            <label class="block text-gray-700">Email</label>
+            <input type="email" name="email" value="{{ auth()->user()->email }}" readonly class="w-full border rounded px-3 py-2" />
         </div>
 
-        <button type="submit" class="btn btn-primary">Confirm Booking</button>
-        <a href="{{ route('services.member') }}" class="btn btn-secondary">Cancel</a>
+        <div class="mb-4">
+            <label class="block text-gray-700">Booking Date</label>
+            <input type="date" name="booking_date" class="w-full border rounded px-3 py-2" required />
+        </div>
+
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Book Now</button>
     </form>
 </div>
 @endsection

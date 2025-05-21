@@ -6,48 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
-    <div class="flex h-screen">
+<body class="font-sans antialiased bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen">
+    <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-green-500 text-white p-5">
-            <h2 class="text-2xl font-bold">Member Panel</h2>
-            <ul class="mt-6">
-                <li class="py-2 px-4 hover:bg-green-700 rounded">
-                    <a href="{{ route('dashboard') }}">Dashboard</a>
-                </li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded">
-                    <a href="{{ route('books.member') }}">Books</a>
-                </li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded">
-                    <a href="{{ route('services.member') }}">Services</a>
-                </li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded">
-                    <a href="{{ route('contacts.create') }}">Contact Us</a>
-                </li>
-            </ul>
-        </div>
+        <aside class="w-72 bg-gradient-to-b from-green-600 via-green-500 to-green-400 text-white flex flex-col p-6 shadow-lg rounded-tr-3xl rounded-br-3xl">
+            <div class="mb-10 flex items-center space-x-3">
+                <span class="material-icons text-4xl">account_circle</span>
+                <span class="text-2xl font-extrabold tracking-wide">Member Panel</span>
+            </div>
+            <nav class="flex-1">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-700 transition font-medium">
+                            <span class="material-icons mr-3">dashboard</span> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('books.member') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-700 transition font-medium">
+                            <span class="material-icons mr-3">menu_book</span> Books
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services.member') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-700 transition font-medium">
+                            <span class="material-icons mr-3">build</span> Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contacts.create') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-700 transition font-medium">
+                            <span class="material-icons mr-3">contact_mail</span> Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <main class="flex-1 flex flex-col">
             <!-- Navbar -->
-            <div class="bg-white shadow p-4 flex justify-between items-center">
-                <h1 class="text-xl font-semibold">{{ config('app.name') }}</h1>
+            <header class="sticky top-0 z-10 bg-white/80 backdrop-blur shadow flex items-center justify-between px-8 py-4">
+                <h1 class="text-2xl font-bold text-green-700 tracking-wide">{{ config('app.name') }}</h1>
                 <div class="flex items-center space-x-4">
-                    <span>Member</span>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">Member</span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 transition text-white font-semibold px-4 py-2 rounded-lg shadow">
+                            Logout
+                        </button>
                     </form>
                 </div>
-            </div>
+            </header>
 
             <!-- Content -->
-            <div class="p-6">
-                @yield('content')
-            </div>
-        </div>
+            <section class="flex-1 p-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 min-h-[70vh]">
+                    @yield('content')
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 

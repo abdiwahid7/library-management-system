@@ -8,47 +8,86 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="font-sans antialiased bg-green-50">
-    <div class="flex h-screen">
+<body class="font-sans antialiased bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen">
+    <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-green-600 text-white p-5">
-            <h2 class="text-2xl font-bold">Admin Panel</h2>
-            <ul class="mt-6">
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('books.index') }}">Books</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('members.index') }}">Members</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('authors.index') }}">Authors</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('transactions.index') }}">Transaction</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('services.index') }}">Services</a></li>
-                <li class="py-2 px-4 hover:bg-green-700 rounded"><a href="{{ route('users.index') }}">User Management</a></li>
-            </ul>
-        </div>
+        <aside class="w-72 bg-gradient-to-b from-green-700 via-green-600 to-green-500 text-white flex flex-col p-6 shadow-lg">
+            <div class="mb-10 flex items-center space-x-3">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"></path>
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"></circle>
+                </svg>
+                <span class="text-3xl font-extrabold tracking-wide">Admin Panel</span>
+            </div>
+            <nav class="flex-1">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">dashboard</span> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('books.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">menu_book</span> Books
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('members.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">people</span> Members
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('authors.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">person</span> Authors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('transactions.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">swap_horiz</span> Transactions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">build</span> Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('users.index') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-green-800 transition font-medium">
+                            <span class="material-icons mr-3">admin_panel_settings</span> User Management
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mt-10">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full bg-red-500 hover:bg-red-600 transition text-white font-semibold py-2 rounded-lg shadow">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </aside>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <main class="flex-1 flex flex-col">
             <!-- Navbar -->
-            <div class="bg-white shadow p-4 flex justify-between items-center">
-                <h1 class="text-xl font-semibold text-green-600">{{ config('app.name') }}</h1>
+            <header class="sticky top-0 z-10 bg-white/80 backdrop-blur shadow flex items-center justify-between px-8 py-4">
+                <h1 class="text-2xl font-bold text-green-700 tracking-wide">{{ config('app.name') }}</h1>
                 <div class="flex items-center space-x-4">
-                    <span class="text-green-600">Admin</span>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
-                    </form>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">Admin</span>
                 </div>
-            </div>
-
-            <!-- Welcome Section -->
-            
+            </header>
 
             <!-- Content Section -->
-            <div class="p-6">
-                @yield('content')
-            </div>
-        </div>
+            <section class="flex-1 p-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 min-h-[70vh]">
+                    @yield('content')
+                </div>
+            </section>
+        </main>
     </div>
-</body>
 
-
+    <!-- Google Material Icons CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </body>
 </html>

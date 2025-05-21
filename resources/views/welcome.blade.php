@@ -7,44 +7,44 @@
 
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
         .hero {
-            background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
         }
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 24px 0 rgba(16, 185, 129, 0.12);
             transition: all 0.3s ease;
         }
     </style>
 </head>
-<body class="font-sans antialiased">
-<div class="min-h-screen flex flex-col bg-green-600">
+<body class="font-sans antialiased bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen">
+<div class="min-h-screen flex flex-col hero">
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm">
+    <nav class="bg-white/90 backdrop-blur shadow sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="text-xl font-bold text-green-600">LibraryMS</div>
+                <div class="text-2xl font-extrabold text-green-600 tracking-wide">LibraryMS</div>
                 <div class="flex space-x-4">
-                    <a href="/" class="text-gray-600 hover:text-green-600 px-3 py-2">Home</a>
-                    <a href="{{ route('books.front') }}" class="text-gray-600 hover:text-green-600 px-3 py-2">Books</a>
-                    <a href="{{ route('services.front') }}" class="text-gray-600 hover:text-green-600 px-3 py-2">Services</a>
-                    <a href="{{ route('contacts.index') }}" class="text-gray-600 hover:text-green-600 px-3 py-2">Contact Us</a>
-                    <a href="/login" class="text-gray-600 hover:text-green-600 px-3 py-2">Login</a>
-                    <a href="/register" class="text-gray-600 hover:text-green-600 px-3 py-2">Register</a>
+                    <a href="/" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Home</a>
+                    <a href="{{ route('books.front') }}" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Books</a>
+                    <a href="{{ route('services.front') }}" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Services</a>
+                    <a href="{{ route('contacts.index') }}" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Contact Us</a>
+                    <a href="/login" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Login</a>
+                    <a href="/register" class="text-gray-600 hover:text-green-600 px-3 py-2 font-medium transition">Register</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="flex-grow flex items-center text-center text-white">
+    <section class="flex-grow flex items-center text-center text-white hero min-h-[60vh]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to Library Management System</h1>
-            <p class="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">Welcome to Library Management System</h1>
+            <p class="text-xl text-green-900 mb-8 max-w-3xl mx-auto">
                 A complete solution for managing your library's books, members, and transactions.
             </p>
             <div class="flex justify-center space-x-4">
@@ -52,7 +52,7 @@
                    class="bg-white text-green-600 px-6 py-3 rounded-lg font-medium hover:bg-green-50 transition">
                     Browse Books
                 </a>
-                <a href="/frontservice"
+                <a href="{{ route('services.front') }}"
                    class="bg-green-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition">
                     View Services
                 </a>
@@ -65,21 +65,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Key Features</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center feature-card">
                     <div class="text-green-500 mb-4">
                         <i class="fas fa-book text-4xl" aria-hidden="true"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Book Management</h3>
                     <p class="text-gray-600">Easily add, edit, and track all books in your library's collection.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center feature-card">
                     <div class="text-green-500 mb-4">
                         <i class="fas fa-users text-4xl" aria-hidden="true"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Member Tracking</h3>
                     <p class="text-gray-600">Manage library members and their borrowing history.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center feature-card">
                     <div class="text-green-500 mb-4">
                         <i class="fas fa-exchange-alt text-4xl" aria-hidden="true"></i>
                     </div>
@@ -114,5 +114,4 @@
     </footer>
 </div>
 </body>
-
 </html>

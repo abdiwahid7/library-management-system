@@ -1,54 +1,64 @@
 @extends('adminlayout.admin')
 
 @section('content')
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
-                <h2 class="text-2xl font-semibold mb-6">New Transaction</h2>
+<div class="py-12 bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen">
+    <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white/90 shadow-2xl rounded-2xl overflow-hidden">
+            <div class="p-8 border-b border-gray-100">
+                <h2 class="text-3xl font-bold text-green-700 mb-8 flex items-center gap-2">
+                    <span class="material-icons">add</span>
+                    New Transaction
+                </h2>
 
                 <form method="POST" action="{{ route('transactions.store') }}">
                     @csrf
 
-                    <div class="mb-4">
-                        <label for="book_id" class="block text-gray-700 text-sm font-bold mb-2">Book</label>
-                        <select name="book_id" id="book_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('book_id') border-red-500 @enderror">
+                    <div class="mb-6">
+                        <label for="book_id" class="block text-green-700 text-sm font-bold mb-2">Book</label>
+                        <select name="book_id" id="book_id"
+                                class="shadow appearance-none border border-green-200 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 @error('book_id') border-red-500 @enderror">
                             <option value="">Select Book</option>
                             @foreach($books as $book)
                                 <option value="{{ $book->id }}">{{ $book->title }}</option>
                             @endforeach
                         </select>
                         @error('book_id')
-                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label for="member_id" class="block text-gray-700 text-sm font-bold mb-2">Member</label>
-                        <select name="member_id" id="member_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('member_id') border-red-500 @enderror">
+                    <div class="mb-6">
+                        <label for="member_id" class="block text-green-700 text-sm font-bold mb-2">Member</label>
+                        <select name="member_id" id="member_id"
+                                class="shadow appearance-none border border-green-200 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 @error('member_id') border-red-500 @enderror">
                             <option value="">Select Member</option>
                             @foreach($members as $member)
                                 <option value="{{ $member->id }}">{{ $member->name }}</option>
                             @endforeach
                         </select>
                         @error('member_id')
-                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label for="transaction_date" class="block text-gray-700 text-sm font-bold mb-2">Transaction Date</label>
-                        <input type="date" name="transaction_date" id="transaction_date" value="{{ old('transaction_date') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('transaction_date') border-red-500 @enderror">
+                    <div class="mb-8">
+                        <label for="transaction_date" class="block text-green-700 text-sm font-bold mb-2">Transaction Date</label>
+                        <input type="date" name="transaction_date" id="transaction_date" value="{{ old('transaction_date') }}"
+                               class="shadow appearance-none border border-green-200 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 @error('transaction_date') border-red-500 @enderror">
                         @error('transaction_date')
-                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                            <p class="text-red-500 text-xs italic mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <button type="submit"
+                                class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-lg shadow transition duration-300 flex items-center gap-2">
+                            <span class="material-icons text-base">save</span>
                             Save Transaction
                         </button>
-                        <a href="{{ route('transactions.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <a href="{{ route('transactions.index') }}"
+                           class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg shadow transition duration-300 flex items-center gap-2">
+                            <span class="material-icons text-base">arrow_back</span>
                             Cancel
                         </a>
                     </div>

@@ -7,23 +7,31 @@
 @endsection
 
 @section('content')
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Welcome Card -->
-            <div class="bg-white overflow-hidden shadow rounded-lg p-6">
-                <h3 class="text-xl font-semibold mb-4 text-green-600">Welcome, {{ auth()->user()->name }}!</h3>
-                <p class="text-gray-700 mb-4">This is your member dashboard where you can manage your books and transactions.</p>
-                <a href="{{ route('books.member') }}" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                    View Books
-                </a>
-            </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+    <h1 class="text-4xl md:text-5xl font-bold text-green-600 mb-6">
+        Welcome, {{ auth()->user()->name }}!
+    </h1>
+    <p class="text-xl text-green-700 mb-8 max-w-3xl mx-auto">
+        Access your library account, view available books, and manage your transactions easily.
+    </p>
 
-
-
-               
-        </div>
+    <div class="flex justify-center flex-wrap gap-4">
+        <a href="{{ route('books.member') }}"
+           class="bg-green-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-600 shadow transition duration-300">
+            Browse Books
+        </a>
+        <a href="{{ route('services.member') }}"
+           class="bg-blue-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-600 shadow transition duration-300">
+            Library Services
+        </a>
+        <a href="{{ route('transactions.member') }}"
+           class="bg-yellow-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-yellow-600 shadow transition duration-300">
+            My Transactions
+        </a>
+        <a href="{{ route('contacts.create') }}"
+           class="bg-white text-green-600 px-6 py-3 rounded-lg font-medium hover:bg-green-50 shadow transition duration-300">
+            Contact Library
+        </a>
     </div>
 </div>
-
 @endsection

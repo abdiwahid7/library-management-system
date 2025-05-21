@@ -1,50 +1,51 @@
 @extends('adminlayout.admin')
 
 @section('content')
-<div class="py-12">
+<div class="py-12 bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Members</h2>
+        <div class="bg-white/90 backdrop-blur-md shadow-2xl rounded-2xl">
+            <div class="p-8 border-b border-gray-100">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-green-700">Members</h2>
                     <a href="{{ route('members.create') }}"
-                       class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition">
-                        + Add New Member
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-semibold py-2 px-5 rounded-lg shadow transition duration-300">
+                        <span class="material-icons">person_add</span>
+                        Add New Member
                     </a>
                 </div>
 
                 @if (session('success'))
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                        {{ session('success') }}
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6 shadow" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
                 @endif
 
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 text-sm">
-                        <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
+                <div class="overflow-x-auto rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-green-200">
+                        <thead class="bg-green-100">
                             <tr>
-                                <th class="px-6 py-3 text-left font-medium">Name</th>
-                                <th class="px-6 py-3 text-left font-medium">Email</th>
-                                <th class="px-6 py-3 text-left font-medium">Member Since</th>
-                                <th class="px-6 py-3 text-left font-medium">Actions</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-green-700 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-green-700 uppercase tracking-wider">Email</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-green-700 uppercase tracking-wider">Member Since</th>
+                                <th class="px-6 py-3 text-left text-xs font-bold text-green-700 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-100">
+                        <tbody class="bg-white divide-y divide-green-100">
                             @forelse ($members as $member)
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $member->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $member->email }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $member->membership_date->format('M d, Y') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap flex gap-3">
+                                <tr class="hover:bg-green-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-base font-semibold text-gray-900">{{ $member->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $member->email }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ $member->membership_date->format('M d, Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2 flex gap-3">
                                         <a href="{{ route('members.edit', $member->id) }}"
-                                           class="text-indigo-600 hover:text-indigo-900 font-medium transition">
-                                            Edit
+                                           class="inline-flex items-center px-3 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded-lg transition duration-200">
+                                            <span class="material-icons text-sm mr-1">edit</span>Edit
                                         </a>
-                                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                                        <form action="{{ route('members.destroy', $member->id) }}" method="POST" onsubmit="return confirm('Are you sure?')" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium transition">
-                                                Delete
+                                            <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-500 hover:bg-red-700 text-white rounded-lg transition duration-200">
+                                                <span class="material-icons text-sm mr-1">delete</span>Delete
                                             </button>
                                         </form>
                                     </td>
@@ -61,5 +62,6 @@
         </div>
     </div>
 </div>
-
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 @endsection
