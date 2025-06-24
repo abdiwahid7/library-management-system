@@ -1,116 +1,106 @@
 <?php
-
-
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\AlumniDashboardController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AlumniProfileController;
+use App\Http\Controllers\AlumniEventController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AlumniBlogController;
+use App\Http\Controllers\AlumniAnnouncementController;
+use App\Http\Controllers\InviteRegisterController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/about', function () {
+    return view('about');
 });
 
-require __DIR__.'/auth.php';
-
-use Illuminate\Support\Facades\Auth;
-
-Route::get('/dashboard', function () {
-    $user = Auth::user();
-    if ($user->role === 'member') {
-        $transactions = $user->transactions()->with('book')->get();
-        return view('dashboard_member', compact('transactions'));
-    }
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::get('/dashboard/home', function () {
-    return view('dashboard.home');
-})->middleware(['auth'])->name('dashboard.home');
-
-
-Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
-    Route::resource('users', UserController::class);
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('services/{service}/book', [BookingController::class, 'create'])->name('bookings.create');
-    Route::post('services/{service}/book', [BookingController::class, 'store'])->name('bookings.store');
-    Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
-});
+// frontend routes
+Route::get('/showEvents', [EventController::class, 'front'])->name('events.front');
+Route::get('/showBlogs', [BlogController::class, 'front'])->name('blogs.front');
+Route::get('/showAnnouncements', [AnnouncementController::class, 'front'])->name('announcements.front');
+Route::get('/about', [AboutController::class, 'front'])->name('about.front');
 
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+Route::get('/contact', function () {
+    return view('contact');
 });
 
 
-// Add frontend named routes for 'front' views
-Route::get('books/front', [BookController::class, 'front'])->name('books.front');
-Route::get('books/member', [BookController::class, 'member'])->name('books.member');
-Route::get('members/front', [MemberController::class, 'front'])->name('members.front');
-Route::get('transactions/front', [TransactionController::class, 'front'])->name('transactions.front');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-Route::get('transactions/member', [TransactionController::class, 'member'])->name('transactions.member');
+    // Users management
+    Route::resource('admin/users', UserController::class);
+    //
+    Route::resource('/admin/users', AdminUserController::class);
 
-Route::get('services/front', [ServiceController::class, 'front'])->name('services.front');
-Route::get('services/member', [ServiceController::class, 'member'])->name('services.member');
-Route::resource('services', ServiceController::class);
+    // about us
+    Route::get('/admin/about', [AboutController::class, 'index'])->name('about.index');
+    Route::get('/admin/about/edit', [AboutController::class, 'edit'])->name('about.edit');
+    Route::post('/admin/about/update', [AboutController::class, 'update'])->name('about.update');
 
-Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');
-Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
-Route::get('contacts', [ContactController::class, 'index'])->middleware('auth')->name('contacts.index');
+    // blogs
+    Route::resource('/admin/blogs', controller: BlogController::class);
+    // events
+    Route::resource('/admin/events', controller: EventController::class);
+    // announcements
+    Route::resource('/admin/announcements', AnnouncementController::class);
 
-Route::get('/dashboard', function () {
-    $user = Auth::user();
+    // This route is for showing the registration completion form.
+    Route::get('register/complete/{email}', [InviteRegisterController::class, 'completeRegistration'])->name('register.complete');
 
-    if ($user->role === 'admin') {
-        $users = \App\Models\User::all(); // Fetch all users for the admin dashboard
-        return view('dashboard', compact('users'));
-    }
+    // This route is for handling the form submission to complete the registration.
+    Route::post('register/complete/{email}', [InviteRegisterController::class, 'postCompleteRegistration'])->name('register.complete.post');
 
-    if ($user->role === 'member') {
-        $transactions = $user->transactions()->with('book')->get();
-        return view('dashboard_member', compact('transactions'));
-    }
 
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-// Front-end Book Routes
-Route::resource('books', BookController::class);
-
-// Front-end Author Routes
-Route::resource('authors', AuthorController::class);
-
-// Front-end Member Routes
-Route::resource('members', MemberController::class);
-
-// Front-end Transaction Routes
-Route::resource('transactions', TransactionController::class)->except(['show']);
-Route::post('transactions/{transaction}/return', [TransactionController::class, 'return'])
-    ->name('transactions.return');
-
-// Dashboard-specific routes with prefix and name prefix
-Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(function () {
-    Route::resource('books', BookController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
-    Route::resource('members', MemberController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
-    Route::resource('transactions', TransactionController::class)->except(['show', 'create', 'store', 'edit', 'update', 'destroy']);
-    Route::post('transactions/{transaction}/return', [TransactionController::class, 'return'])
-        ->name('transactions.return');
 });
 
-Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::resource('books', BookController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
-    Route::resource('members', MemberController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
-    Route::resource('transactions', TransactionController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+Route::middleware(['auth', 'alumni'])->group(function () {
+    Route::get('/dashboard/alumni', [AlumniDashboardController::class, 'index'])->name('alumni.dashboard');
+
+    // Profile management
+    Route::get('/alumni/profile', [AlumniProfileController::class, 'show'])->name('alumni.profile.show');
+    Route::get('/alumni/profile/edit', [AlumniProfileController::class, 'edit'])->name('alumni.profile.edit');
+    Route::put('/alumni/profile', [AlumniProfileController::class, 'update'])->name('alumni.profile.update');
+
+    // events
+    Route::get('/alumni/events', [AlumniEventController::class, 'index'])->name('alumni.events.index');
+    // Blogs
+    Route::get('/alumni/blogs', [AlumniBlogController::class, 'index'])->name('alumni.blogs.index');
+
+    // Announcements
+    Route::get('/alumni/announcements', [AlumniAnnouncementController::class, 'index'])->name('alumni.announcements.index');
+
 });
+
+
+
+
+
+require __DIR__ . '/auth.php';
